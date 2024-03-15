@@ -14,8 +14,10 @@ from core.event import lifespan
 from core.exception import register_exception
 from core.middleware import register_middlewares
 from core.mounting import register_mounting
-from db.migrate import create_tables
+# from db.migrate import create_tables
 import typer
+
+from modules.fastsearch.knowledge_base_manager.db.migrate import create_tables
 
 shell_app = typer.Typer()
 
@@ -72,7 +74,7 @@ def init():
     初始化数据库
     需要迁移到数据库的模型 要在application/configs/database_config.py的MIGRATE_MODELS里配置
     """
-    asyncio.run(create_tables())
+    create_tables()
     print("数据库初始化完成！")
 
 
