@@ -1,0 +1,15 @@
+测试方式：1s内发送完n个请求
+标准：90%请求在3s内响应
+
+embeddings模型为bge-large-zh-v1.5
+reranker模型为bge-reranker-base
+
+
+开了3个workers，同时调用embedding和reranker模型，90%请求在3s内响应大约300个，总共600个请求
+
+
+模型运行环境：
+OS：	windows
+GPU：	NVIDIA GeForce RTX 4090
+CPU：	13th Gen Intel(R) Core(TM) i7-13700KF，3400 Mhz，16 个内核，24 个逻辑处理器
+RAM：	64.0 GB

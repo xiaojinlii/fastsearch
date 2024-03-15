@@ -1,0 +1,14 @@
+[Unit]
+Description=Fast Search Service
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/root/fast-search
+Environment="PATH=/root/miniconda3/envs/fast-search/bin"
+ExecStart=/root/miniconda3/envs/fast-search/bin/python main.py run
+Restart=on-failure
+PIDFile=/var/run/fast-search.pid
+
+[Install]
+WantedBy=multi-user.target
