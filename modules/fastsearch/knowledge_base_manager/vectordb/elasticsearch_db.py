@@ -173,12 +173,12 @@ class ElasticsearchKB(VectorKB):
             "explain": False,
             "query": {
                 # "match": {
-                #     "context": query
+                #     Properties.CONTEXT.value: query
                 # },
                 "multi_match": {
                     "query": query,
                     "type": "most_fields",
-                    "fields": ["content", "metadata.head1", "metadata.head2", "metadata.head3"]
+                    "fields": [Properties.CONTEXT.value, "metadata.head1", "metadata.head2", "metadata.head3"]
                 }
             },
             "size": top_k
@@ -191,7 +191,7 @@ class ElasticsearchKB(VectorKB):
 
         def default_doc_builder(hit: Dict) -> Document:
             return Document(
-                page_content=hit["_source"].get("context", ""),
+                page_content=hit["_source"].get(Properties.CONTEXT.value, ""),
                 metadata=hit["_source"]["metadata"],
             )
 
@@ -202,7 +202,7 @@ class ElasticsearchKB(VectorKB):
             for field in fields:
                 if field in hit["_source"] and field not in [
                     "metadata",
-                    "context",
+                    Properties.CONTEXT.value,
                 ]:
                     if "metadata" not in hit["_source"]:
                         hit["_source"]["metadata"] = {}
@@ -229,8 +229,8 @@ class ElasticsearchKB(VectorKB):
                     source = res["_source"]
                     context = ""
                     metadata = ""
-                    if "context" in source:
-                        context = source["context"]
+                    if Properties.CONTEXT.value in source:
+                        context = source[Properties.CONTEXT.value]
                     if "metadata" in source:
                         metadata = source["metadata"]
                     results.append(Document(page_content=context, metadata=metadata))
