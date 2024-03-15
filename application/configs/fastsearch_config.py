@@ -1,8 +1,6 @@
 import os
 
-
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
 
 """
 知识库默认存储路径
@@ -12,7 +10,6 @@ if not os.path.exists(KB_ROOT_PATH):
     os.mkdir(KB_ROOT_PATH)
 DB_ROOT_PATH = os.path.join(KB_ROOT_PATH, "info.db")
 
-
 """
 数据库配置项
 连接引擎官方文档：https://www.osgeo.cn/sqlalchemy/core/engines.html
@@ -20,7 +17,6 @@ DB_ROOT_PATH = os.path.join(KB_ROOT_PATH, "info.db")
 sqlite配置说明：sqlite+aiosqlite:///数据库路径，需要安装支持异步操作的 SQLite 驱动，如aiosqlite
 """
 SQLALCHEMY_DATABASE_URL_SYNC = f"sqlite:///{DB_ROOT_PATH}"
-
 
 """
 向量数据库配置
@@ -36,7 +32,6 @@ VECTOR_DB = {
         "ca_certs": r"D:\kibana-8.11.0\data\ca_1703500158232.crt",
     },
 }
-
 
 """知识库配置"""
 # 默认向量库/全文检索引擎类型。可选：faiss, milvus(离线) & zilliz(在线), pgvector,全文检索引擎es
@@ -60,7 +55,6 @@ USE_RERANKER = True
 RERANKER_MODEL_URL = "http://10.12.25.5:21021"
 # 选用的embeddings模型
 EMBEDDINGS_MODEL_URL = "http://10.12.25.5:21021"
-
 
 """
 分词器
@@ -95,7 +89,6 @@ TEXT_SPLITTER_DICT = {
             ]
     },
 }
-
 
 """
 文档加载器
@@ -137,3 +130,11 @@ LOADER_DICT = {
     "UnstructuredPowerPointLoader": ['.ppt', '.pptx'],
     "EverNoteLoader": ['.enex'],
 }
+
+"""
+缓存向量库配置
+用于缓存问题，以及gpt回复的答案
+"""
+DEFAULT_QA_KB = "qa_kb"
+DEFAULT_QA_KB_MAX_NUM = 10000
+DEFAULT_QA_KB_PER_NUM = 5

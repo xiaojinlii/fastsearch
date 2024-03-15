@@ -32,6 +32,11 @@ class VectorKB(ABC):
     def get_docs_by_ids(self, ids: List[str]) -> List[Document]:
         return []
 
+    @abstractmethod
+    def get_all_docs_num(self) -> int:
+        """获取文档数量"""
+        raise NotImplemented
+
 
 class VectorDB(ABC):
     def __init__(self):

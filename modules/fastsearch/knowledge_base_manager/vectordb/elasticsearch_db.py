@@ -129,10 +129,11 @@ class ElasticsearchKB(VectorKB):
 
     def delete_docs(self, kb_file, **kwargs):
         # 从向量数据库中删除索引(文档名称是Keyword)
+        keyword = kb_file if type(kb_file) == str else kb_file.filename
         query = {
             "query": {
                 "term": {
-                    "metadata.source.keyword": kb_file.filename
+                    "metadata.source.keyword": keyword
                 }
             }
         }
@@ -236,6 +237,11 @@ class ElasticsearchKB(VectorKB):
             except Exception as e:
                 logger.error(f"ES Docs get_doc_by_ids Error! {e}")
         return results
+
+    def get_all_docs_num(self) -> int:
+        res = self.es_connection.count(index=self.index_name)
+        num = res.get("count") or 0
+        return num
 
 
 class ElasticsearchDB(VectorDB):
