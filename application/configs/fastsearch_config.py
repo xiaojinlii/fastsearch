@@ -63,13 +63,6 @@ EMBEDDINGS_MODEL_URL = "http://10.12.25.5:21021"
 
 
 """
-文档加载器
-"""
-# PDF OCR 控制：只对宽高超过页面一定比例（图片宽/页面宽，图片高/页面高）的图片进行 OCR。
-# 这样可以避免 PDF 中一些小图片的干扰，提高非扫描版 PDF 处理速度
-PDF_OCR_THRESHOLD = (0.6, 0.6)
-
-"""
 分词器
 TextSplitter配置项，如果你不明白其中的含义，就不要修改。
 """
@@ -78,6 +71,7 @@ CHUNK_SIZE = 250
 # 知识库中相邻文本重合长度(不适用MarkdownHeaderTextSplitter)
 OVERLAP_SIZE = 50
 
+# 分词器配置
 TEXT_SPLITTER_DICT = {
     "ChineseRecursiveTextSplitter": {
         "source": "huggingface",  # 选择tiktoken则使用openai的方法
@@ -100,4 +94,46 @@ TEXT_SPLITTER_DICT = {
                 ("####", "head4"),
             ]
     },
+}
+
+
+"""
+文档加载器
+"""
+# PDF OCR 控制：只对宽高超过页面一定比例（图片宽/页面宽，图片高/页面高）的图片进行 OCR。
+# 这样可以避免 PDF 中一些小图片的干扰，提高非扫描版 PDF 处理速度
+PDF_OCR_THRESHOLD = (0.6, 0.6)
+
+# 不同文件类型对应的加载器
+LOADER_DICT = {
+    "UnstructuredHTMLLoader": ['.html'],
+    "MHTMLLoader": ['.mhtml'],
+    # "UnstructuredMarkdownLoader": ['.md'],
+    "TextLoader": ['.md'],
+    "JSONLoader": [".json"],
+    "JSONLinesLoader": [".jsonl"],
+    "CSVLoader": [".csv"],
+    # "FilteredCSVLoader": [".csv"], 如果使用自定义分割csv
+    "RapidOCRPDFLoader": [".pdf"],
+    "RapidOCRDocLoader": ['.docx', '.doc'],
+    "RapidOCRPPTLoader": ['.ppt', '.pptx', ],
+    "RapidOCRLoader": ['.png', '.jpg', '.jpeg', '.bmp'],
+    "UnstructuredFileLoader": ['.eml', '.msg', '.rst',
+                               '.rtf', '.txt', '.xml',
+                               '.epub', '.odt', '.tsv'],
+    "UnstructuredEmailLoader": ['.eml', '.msg'],
+    "UnstructuredEPubLoader": ['.epub'],
+    "UnstructuredExcelLoader": ['.xlsx', '.xls', '.xlsd'],
+    "NotebookLoader": ['.ipynb'],
+    "UnstructuredODTLoader": ['.odt'],
+    "PythonLoader": ['.py'],
+    "UnstructuredRSTLoader": ['.rst'],
+    "UnstructuredRTFLoader": ['.rtf'],
+    "SRTLoader": ['.srt'],
+    "TomlLoader": ['.toml'],
+    "UnstructuredTSVLoader": ['.tsv'],
+    "UnstructuredWordDocumentLoader": ['.docx', '.doc'],
+    "UnstructuredXMLLoader": ['.xml'],
+    "UnstructuredPowerPointLoader": ['.ppt', '.pptx'],
+    "EverNoteLoader": ['.enex'],
 }

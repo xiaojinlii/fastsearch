@@ -2,6 +2,8 @@ import importlib
 from typing import Dict
 import chardet
 from langchain_community import document_loaders
+
+from application.configs import LOADER_DICT
 from core.logger import logger
 
 
@@ -16,39 +18,6 @@ class JSONLinesLoader(document_loaders.JSONLoader):
 
 document_loaders.JSONLinesLoader = JSONLinesLoader
 
-
-LOADER_DICT = {
-    "UnstructuredHTMLLoader": ['.html'],
-    "MHTMLLoader": ['.mhtml'],
-    # "UnstructuredMarkdownLoader": ['.md'],
-    "TextLoader": ['.md'],
-    "JSONLoader": [".json"],
-    "JSONLinesLoader": [".jsonl"],
-    "CSVLoader": [".csv"],
-    # "FilteredCSVLoader": [".csv"], 如果使用自定义分割csv
-    "RapidOCRPDFLoader": [".pdf"],
-    "RapidOCRDocLoader": ['.docx', '.doc'],
-    "RapidOCRPPTLoader": ['.ppt', '.pptx', ],
-    "RapidOCRLoader": ['.png', '.jpg', '.jpeg', '.bmp'],
-    "UnstructuredFileLoader": ['.eml', '.msg', '.rst',
-                               '.rtf', '.txt', '.xml',
-                               '.epub', '.odt', '.tsv'],
-    "UnstructuredEmailLoader": ['.eml', '.msg'],
-    "UnstructuredEPubLoader": ['.epub'],
-    "UnstructuredExcelLoader": ['.xlsx', '.xls', '.xlsd'],
-    "NotebookLoader": ['.ipynb'],
-    "UnstructuredODTLoader": ['.odt'],
-    "PythonLoader": ['.py'],
-    "UnstructuredRSTLoader": ['.rst'],
-    "UnstructuredRTFLoader": ['.rtf'],
-    "SRTLoader": ['.srt'],
-    "TomlLoader": ['.toml'],
-    "UnstructuredTSVLoader": ['.tsv'],
-    "UnstructuredWordDocumentLoader": ['.docx', '.doc'],
-    "UnstructuredXMLLoader": ['.xml'],
-    "UnstructuredPowerPointLoader": ['.ppt', '.pptx'],
-    "EverNoteLoader": ['.enex'],
-}
 
 SUPPORTED_EXTS = [ext for sublist in LOADER_DICT.values() for ext in sublist]
 

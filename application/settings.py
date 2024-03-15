@@ -11,8 +11,8 @@ DEBUG = False
 
 
 """项目配置"""
-TITLE = "FastAPI Framework"
-DESCRIPTION = "基于FastAPI的Web框架"
+TITLE = "Fast Search"
+DESCRIPTION = "基于FastAPI的知识库系统"
 VERSION = "0.0.1"
 
 
