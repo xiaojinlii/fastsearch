@@ -3,11 +3,12 @@ from enum import Enum
 from typing import List, Dict
 
 from elasticsearch import Elasticsearch
-from langchain_community.vectorstores.elasticsearch import ElasticsearchStore
+from langchain_elasticsearch import ElasticsearchStore
 from langchain_community.vectorstores.utils import DistanceStrategy
 from langchain_core.documents import Document
 
 from application.settings import VECTOR_DB
+from core.exception import CustomException
 from core.logger import logger
 from .base import VectorDB, VectorKB
 
@@ -271,8 +272,10 @@ class ElasticsearchDB(VectorDB):
         return self._exist_index(kb_name)
 
     def _create_kb(self, kb_name: str) -> VectorKB:
-        if not self._exist_index(kb_name):
-            self._create_index(kb_name, self.distance_strategy)
+        if self._exist_index(kb_name):
+            raise CustomException(f"向量库elasticsearch中已存在索引:{kb_name}")
+
+        self._create_index(kb_name, self.distance_strategy)
         kb = ElasticsearchKB(
             knowledge_base_name=kb_name,
             es_connection=self.es_connection,
