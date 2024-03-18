@@ -216,6 +216,49 @@ class ElasticsearchKB(VectorKB):
             )
         return docs_and_scores
 
+    def search_cache_qa(self, query: str, top_k: int, score_threshold: float):
+            query_dict = {
+                "explain": False,
+                "query": {
+                    "match": {
+                        Properties.CONTEXT.value: query
+                    },
+                },
+                "size": top_k
+            }
+            res = self.es_connection.search(index=self.index_name, body=query_dict)
+
+            fields = []
+            if "metadata" not in fields:
+                fields.append("metadata")
+
+            def default_doc_builder(hit: Dict) -> Document:
+                return Document(
+                    page_content=hit["_source"].get(Properties.CONTEXT.value, ""),
+                    metadata=hit["_source"]["metadata"],
+                )
+
+            doc_builder = default_doc_builder
+
+            docs_and_scores = []
+            for hit in res["hits"]["hits"]:
+                for field in fields:
+                    if field in hit["_source"] and field not in [
+                        "metadata",
+                        Properties.CONTEXT.value,
+                    ]:
+                        if "metadata" not in hit["_source"]:
+                            hit["_source"]["metadata"] = {}
+                        hit["_source"]["metadata"][field] = hit["_source"][field]
+
+                docs_and_scores.append(
+                    (
+                        doc_builder(hit),
+                        hit["_score"],
+                    )
+                )
+            return docs_and_scores
+
     def get_docs_by_ids(self, ids: List[str]) -> List[Document]:
         results = []
         for doc_id in ids:

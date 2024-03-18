@@ -21,7 +21,7 @@ def check_str_like(
     logger.info(f"游戏服尝试使用缓存数据库中的答案")
     try:
         kb_service = KBService.get_kb_service(DEFAULT_QA_KB)
-        docs = kb_service.search_docs(query, 1, score_threshold)
+        docs = kb_service.vector_kb.search_cache_qa(query, 1, score_threshold)
 
         answer = ""
         score = 0
@@ -56,7 +56,7 @@ def set_qa_into_db(
             return SuccessResponse(
                 msg=f"向qa问答库 {DEFAULT_QA_KB}添加文档失败！文档数量达到上限！")  # todo code!=200的话，游戏服会重新请求，这里先用SuccessResponse
 
-        old_docs = kb_service.search_docs(query, 1, SCORE_THRESHOLD)
+        old_docs = kb_service.vector_kb.search_cache_qa(query, 1, SCORE_THRESHOLD)
         answers = []
         if len(old_docs) > 0:
             answers = old_docs[0][0].metadata.get("answers")
