@@ -154,6 +154,7 @@ async def search_docs(
                                                   "取到1相当于不筛选，建议设置在0.5左右",
                                       ge=0, le=2),
 ):
+    logger.debug(f"----------------> query:{query}")
     try:
         kb_service = KBService.get_kb_service(knowledge_base_name)
     except CustomException as e:
