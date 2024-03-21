@@ -155,8 +155,8 @@ class ElasticsearchKB(VectorKB):
         knn_docs = self.search_knn(query, top_k, score_threshold)
         bm25_docs = self.search_bm25(query, top_k, score_threshold)
 
-        logger.info(f"es_kb_service knn_docs:{knn_docs}")
-        logger.info(f"es_kb_service bm25_docs:{bm25_docs}")
+        logger.debug(f"knn_docs:{knn_docs}")
+        logger.debug(f"bm25_docs:{bm25_docs}")
 
         # rrf 融合
         docs = weighted_reciprocal_rank([knn_docs, bm25_docs], [0.5, 0.5])
