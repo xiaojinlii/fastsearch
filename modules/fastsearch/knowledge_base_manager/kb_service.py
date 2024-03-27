@@ -6,8 +6,7 @@ from langchain_core.documents import Document
 from pydantic.v1 import root_validator, BaseModel, Field
 
 from application.settings import CHUNK_SIZE, OVERLAP_SIZE, ZH_TITLE_ENHANCE, VECTOR_SEARCH_TOP_K, SCORE_THRESHOLD
-from core.logger import logger
-from core.exception import CustomException
+from xiaoapi.core import CustomException, logger
 from .file.knowledge_file import KnowledgeFile, files2docs_in_thread
 from .vectordb.base import VectorDBFactory, VectorDB, VectorKB
 

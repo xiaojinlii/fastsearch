@@ -7,9 +7,8 @@ from typing import List
 
 from application.settings import CHUNK_SIZE, OVERLAP_SIZE, ZH_TITLE_ENHANCE, VECTOR_SEARCH_TOP_K, SCORE_THRESHOLD, \
     USE_RERANKER, RERANKER_MODEL_URL
-from core.exception import CustomException
-from utils.response import SuccessResponse, ErrorResponse
-from core.logger import logger
+from xiaoapi.core import CustomException, logger
+from xiaoapi.response import SuccessResponse, ErrorResponse
 from .utils import validate_kb_name, DocumentWithVSId
 from .knowledge_base_manager.file import file_manager
 from .knowledge_base_manager.file.knowledge_file import files2docs_in_thread, KnowledgeFile
