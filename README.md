@@ -5,6 +5,7 @@
 ## 安装
 ```
 pip install -r requirements.txt
+pip install -r requirements_webui.txt
 ```
 
 ## 配置
@@ -41,6 +42,12 @@ python manage.py sqlalchemy create-tables
 
 
 ## 启动
+### 启动fastapi服务
 ```
 python manage.py run-server
+```
+
+### 启动webui
+```
+streamlit run webui.py
 ```
