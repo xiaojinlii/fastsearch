@@ -8,8 +8,7 @@ from langchain_community.vectorstores.utils import DistanceStrategy
 from langchain_core.documents import Document
 
 from application.settings import VECTOR_DB
-from core.exception import CustomException
-from core.logger import logger
+from xiaoapi.core import CustomException, logger
 from .base import VectorDB, VectorKB
 
 

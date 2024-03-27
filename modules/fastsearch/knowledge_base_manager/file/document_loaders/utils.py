@@ -3,8 +3,8 @@ from typing import Dict
 import chardet
 from langchain_community import document_loaders
 
-from application.configs import LOADER_DICT
-from core.logger import logger
+from application.settings import LOADER_DICT
+from xiaoapi.core import logger
 
 
 class JSONLinesLoader(document_loaders.JSONLoader):

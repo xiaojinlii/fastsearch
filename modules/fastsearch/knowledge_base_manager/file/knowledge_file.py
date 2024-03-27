@@ -6,7 +6,7 @@ from langchain_core.documents import Document
 from langchain_text_splitters import TextSplitter
 
 from application.settings import ZH_TITLE_ENHANCE, CHUNK_SIZE, OVERLAP_SIZE
-from core.logger import logger
+from xiaoapi.core import logger
 from .document_loaders.utils import SUPPORTED_EXTS, get_loader_name, get_loader
 from .file_manager import get_file_path
 from .text_splitter.utils import get_splitter_name, make_text_splitter
