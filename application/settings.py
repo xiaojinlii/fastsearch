@@ -171,3 +171,11 @@ LOADER_DICT = {
     "UnstructuredPowerPointLoader": ['.ppt', '.pptx'],
     "EverNoteLoader": ['.enex'],
 }
+
+"""
+缓存向量库配置
+用于缓存问题，以及gpt回复的答案
+"""
+DEFAULT_QA_KB = "qa_kb"
+DEFAULT_QA_KB_MAX_NUM = 10000
+DEFAULT_QA_KB_PER_NUM = 5

@@ -2,11 +2,10 @@ import random
 from fastapi import APIRouter, File, Form, UploadFile, Body, Query
 from langchain_core.documents import Document
 
-from application.configs import DEFAULT_VS_TYPE
+from application.settings import DEFAULT_VS_TYPE
 from application.settings import SCORE_THRESHOLD, DEFAULT_QA_KB, DEFAULT_QA_KB_MAX_NUM, DEFAULT_QA_KB_PER_NUM
-from core.exception import CustomException
-from utils.response import SuccessResponse, ErrorResponse
-from core.logger import logger
+from xiaoapi.core import CustomException, logger
+from xiaoapi.response import SuccessResponse, ErrorResponse
 from .utils import validate_kb_name, DocumentWithVSId
 from .knowledge_base_manager.kb_service import KBService
 
