@@ -1,4 +1,4 @@
-xiaoapi>=0.0.2
+xiaoapi>=0.0.3
 
 # fastsearch
 langchain==0.1.12
