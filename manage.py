@@ -3,8 +3,8 @@ import os
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('FASTAPI_SETTINGS_MODULE', 'application.settings')
-    os.environ.setdefault('FASTAPI_ROUTES_MODULE', 'application.routes.register_routes')
+    os.environ.setdefault('XIAOAPI_SETTINGS_MODULE', 'application.settings')
+    os.environ.setdefault('XIAOAPI_ROUTES_MODULE', 'application.routes.register_routes')
     try:
         from xiaoapi.management import manage_typer
         from modules.fastsearch.commands import sqlalchemy_typer
