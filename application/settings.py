@@ -9,7 +9,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # 注意：不要在生产中打开调试运行!
-DEBUG = False
+DEBUG = True
 
 ####################
 # PROJECT SETTINGS #

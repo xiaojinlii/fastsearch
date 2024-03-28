@@ -1,4 +1,4 @@
-xiaoapi
+xiaoapi>=0.0.2
 
 # fastsearch
 langchain==0.1.12
@@ -6,6 +6,6 @@ elasticsearch==8.12.0
 python-multipart==0.0.9
 chardet==5.2.0
 tqdm==4.66.2
-sse_starlette==1.8.2
+sse-starlette==1.8.2
 langchain-elasticsearch==0.1.1
 httpx==0.27.0
